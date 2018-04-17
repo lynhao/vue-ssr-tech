@@ -53,9 +53,9 @@ app.use(async (ctx, next) => {
   }
 })
 app.use(koaBody())
-app.use(userRouter.routes()).use(userRouter.allowedMethods)
+app.use(userRouter.routes()).use(userRouter.allowedMethods())
 app.use(staticRouter.routes()).use(staticRouter.allowedMethods())
-app.use(apiRouter.routes()).use(apiRouter.allowedMethods)
+app.use(apiRouter.routes()).use(apiRouter.allowedMethods())
 
 let pageRouter
 if (isDev) {
