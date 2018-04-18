@@ -48,6 +48,8 @@ export default {
           .then(() => {
             // 使用replace之后 返回页面不会跳转到login
             this.$router.replace('/app')
+          }).catch(err => {
+            console.log(err)
           })
       }
     },

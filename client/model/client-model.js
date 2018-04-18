@@ -19,7 +19,10 @@ const handleRequest = (request) => {
     }).catch(err => {
       const resp = err.response
       if (resp.status === 401) {
+        console.log('need auth')
         reject(createError(401, 'need auth'))
+      } else if (resp.status === 400) {
+        reject(createError(400, resp.data.message))
       }
     })
   })

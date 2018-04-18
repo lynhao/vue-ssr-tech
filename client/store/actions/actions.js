@@ -8,6 +8,10 @@ const handleError = (err) => {
       content: '请先登录~'
     })
     bus.$emit('auth')
+  } else if (err.code === 400) {
+    notify({
+      content: err.message
+    })
   }
 }
 export default {
