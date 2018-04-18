@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <div id="cover"></div>
+    <div id="loading" v-show="loading">
+      <loading></loading>
+    </div>
     <Header></Header>
-    <p>{{fullName}}{{counter}}</p>
+    <!-- <p>{{fullName}}{{counter}}</p> -->
    <!--  <p>{{textC}}</p>
     <p>{{textPlus}}</p>
  -->
@@ -17,7 +20,7 @@
       <router-view />
     </transition>
     <!-- <notification content="test notify" @close="close"></notification> -->
-    <button @click="notify">123</button>
+    <!-- <button @click="notify">123</button> -->
     <Footer></Footer>
   </div>
 </template>
@@ -31,7 +34,8 @@ import {
 } from 'vuex'
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
-import Todo from './views/todo/todo.vue'
+// import Todo from './views/todo/todo.vue'
+import Loading from './components/loading/loading.vue'
 
 console.log(Header.__docs)
 
@@ -42,7 +46,8 @@ export default {
   components: {
     Header,
     Footer,
-    Todo
+    // Todo,
+    Loading
   },
   methods: {
     ...mapActions([
@@ -93,15 +98,18 @@ export default {
     // this['b/textAction']()
   },
   computed: {
+    ...mapState([
+      'loading'
+    ]),
     // textA () {
     //   return this.$store.state.a.text
     // },
-    ...mapState({
-      // 'count',
-      counter: (state) => state.count
-      // textA: state => state.a.text,
-      // textC: state => state.c.text
-    }),
+    // ...mapState({
+    //   // 'count',
+    //   counter: (state) => state.count
+    //   // textA: state => state.a.text,
+    //   // textC: state => state.c.text
+    // }),
     // count () {
     //   return this.$store.state.count
     // },
@@ -134,5 +142,17 @@ export default {
   background-color #999
   opacity .9
   z-index -1
+}
+#loading {
+  position: fixed
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  background-color: rgba(255,255,255,.3)
+  z-index: 99
+  display: flex
+  align-items: center
+  justify-content: center
 }
 </style>
