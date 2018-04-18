@@ -14,7 +14,7 @@ const createError = (code, resp) => {
   return err
 }
 
-const handleRequest = ({status, data, ...rest}) => {
+const handleRequest = ({status, data, rest}) => {
   if (status === 200) {
     return data
   } else {

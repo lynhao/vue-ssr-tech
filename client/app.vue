@@ -6,16 +6,16 @@
    <!--  <p>{{textC}}</p>
     <p>{{textPlus}}</p>
  -->
-    <todo></todo>
+    <!-- <todo></todo> -->
     <!-- <tabs>
       <tab label="text">
         <span slot="label"></span>
         <p>tab content</p>
       </tab>
     </tabs> -->
-    <!-- <transition name="fade" mode="out-in">
+    <transition name="fade" mode="out-in">
       <router-view />
-    </transition> -->
+    </transition>
     <!-- <notification content="test notify" @close="close"></notification> -->
     <button @click="notify">123</button>
     <Footer></Footer>
