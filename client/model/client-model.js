@@ -3,6 +3,7 @@ import { createError } from './util'
 
 const request = axios.create({
   baseURL: '/'
+  // baseURL: process.env.VUE_ENV === 'server' ? 'http://127.0.0.1:3333' : '/'   //自己给自己发请求,  缺点是拿不到cookies, 不能判断登录
 })
 
 const handleRequest = (request) => {
@@ -18,6 +19,7 @@ const handleRequest = (request) => {
       resolve(data.data)
     }).catch(err => {
       const resp = err.response
+      // console.log(resp)
       if (resp.status === 401) {
         console.log('need auth')
         reject(createError(401, 'need auth'))

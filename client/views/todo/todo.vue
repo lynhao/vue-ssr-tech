@@ -60,6 +60,14 @@ export default {
   mounted () {
     this.fetchTodos()
   },
+  asyncData ({ store }) {
+    // return new Promise((resolve) => {
+    //   setTimeout(function () {
+    //     resolve(123)
+    //   }, 1000)
+    // })
+    return store.dispatch('fetchTodos')
+  },
   components: {
     Item,
     Helper
