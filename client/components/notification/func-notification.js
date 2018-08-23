@@ -27,8 +27,9 @@ export default {
         clearTimeout(this.timer)
       }
     },
-    afterEnter () {
+    afterEnter (el) {
       this.height = this.$el.offsetHeight
+      console.log(el.offsetHeight)
     }
   },
   beforeDestory () {

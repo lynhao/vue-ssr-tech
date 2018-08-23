@@ -31,6 +31,10 @@ let config
 
 config = merge(baseConfig, {
     entry: path.join(__dirname, '../practice/index.js'),
+    // output: {
+    //   filename: '[name].[hash:8].js',
+    //   publicPath: '/'
+    // },
     devtool: '#cheap-module-eval-source-map',
     module: {
       rules: [

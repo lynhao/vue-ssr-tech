@@ -6,8 +6,8 @@
          @mouseenter="clearTimer"
          @mouseleave="createTimer">
 		<span class="content">{{content}}</span>
-		<a class="btn" @click.prevent="handleClose">{{btn || '关闭'}}</a>
-	</div>	
+		<a class="btn" @click.prevent="handleClose">{{btn}}</a>
+	</div>
   </transition>
 </template>
 
@@ -43,7 +43,8 @@
       afterLeave () {
         this.$emit('closed')
       },
-      afterEnter () {
+      afterEnter (el) {
+        console.log(el)
       },
       clearTimer () {
       },

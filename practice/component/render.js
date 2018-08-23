@@ -4,10 +4,19 @@ const component = {
   props: ['props1'],
   name: 'comp',
   // template: `
-  //   <div :style="style">
-  //     <slot></slot>
+  //   <div :style="style" class="div1">
+  //     {{props1}}
+  //     <slot name="headers"></slot>
   //   </div>
   // `,
+  // render (createElement) {
+  //   return createElement('div', {
+  //     style: this.style
+  //   }, [
+  //     this.$slots.headers,
+  //     this.props1
+  //   ])
+  // },
   render (createElement) {
     return createElement('div', {
       style: this.style,
@@ -15,7 +24,7 @@ const component = {
         class: 'div1'
       }
       // on: {
-      //   click: () => { this.$emit('click') }
+      //   click: () => { this.$emit('clickme') }
       // }
     }, [
       this.$slots.header,
@@ -41,11 +50,12 @@ new Vue({
   el: '#root',
   data () {
     return {
-      value: '123'
+      value: 'abc'
     }
   },
   mounted () {
     console.log(this.$refs.comp.value, this.$refs.span)
+    console.log(this.$refs)
   },
   methods: {
     handleClick () {
@@ -53,10 +63,10 @@ new Vue({
     }
   },
   // template: `
-  //   <comp-one ref="comp">
-  //     <span ref="span">{{value}}</span>
+  //   <comp-one ref="comp" @click="handleClick" :props1="value">
+  //     <span ref="span" id="test-id" >{{value}}</span>
   //   </comp-one>
-  // `,
+  // `
   render (createElement) {
     return createElement(
       'comp-one',
@@ -66,8 +76,8 @@ new Vue({
           props1: this.value
         },
         // on: {
-        //   click: this.handleClick
-        // },
+        //   clickme: this.handleClick
+        // }
         nativeOn: {
           click: this.handleClick
         }
@@ -75,7 +85,7 @@ new Vue({
       [
         createElement('span', {
           ref: 'span',
-          slot: 'header',
+          slot: 'headers',
           // domProps: {
           //   innerHTML: '<span>1234</span>'
           // },

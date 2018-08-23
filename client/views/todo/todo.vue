@@ -58,15 +58,21 @@ export default {
   },
   props: ['id'],
   mounted () {
-    this.fetchTodos()
+    if (this.todos && this.todos.length < 1) {
+      this.fetchTodos()
+    }
   },
-  asyncData ({ store }) {
+  asyncData ({ store, router }) {
+    if (store.state.user) {
+      return store.dispatch('fetchTodos')
+    }
+    router.replace('/login')
+    return Promise.resolve()
     // return new Promise((resolve) => {
     //   setTimeout(function () {
     //     resolve(123)
     //   }, 1000)
     // })
-    return store.dispatch('fetchTodos')
   },
   components: {
     Item,
@@ -124,6 +130,7 @@ export default {
       this.deleteAllCompleted()
     },
     handleChangeTab (value) {
+      console.log(value)
       this.filter = value
     }
   }

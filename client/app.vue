@@ -5,7 +5,7 @@
       <loading></loading>
     </div>
     <Header></Header>
-    <!-- <p>{{fullName}}{{counter}}</p> -->
+    <p>{{fullName}}{{count}}</p>
    <!--  <p>{{textC}}</p>
     <p>{{textPlus}}</p>
  -->
@@ -19,8 +19,8 @@
     <transition name="fade" mode="out-in">
       <router-view />
     </transition>
-    <!-- <notification content="test notify" @close="close"></notification> -->
-    <!-- <button @click="notify">123</button> -->
+   <!--  <notification content="test notify" @close="close"></notification> -->
+    <button @click="notify">123</button>
     <Footer></Footer>
   </div>
 </template>
@@ -99,7 +99,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'loading'
+      'loading',
+      'count'
     ]),
     // textA () {
     //   return this.$store.state.a.text

@@ -3,7 +3,7 @@ import Vue from 'vue'
 new Vue({
   el: '#root',
   template: `
-    <div>
+    <div :class="{ active: !isActive }">
       {{isActive ? 'active' : 'not-active'}}
       <p v-html="html"></p>
     </div>

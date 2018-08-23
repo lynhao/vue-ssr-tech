@@ -30,7 +30,6 @@
           <ul class="tabs-header">
             {this.$slots.default}
           </ul>
-          <tab-container panes={this.panes}></tab-container>
         </div>
       )
     },
