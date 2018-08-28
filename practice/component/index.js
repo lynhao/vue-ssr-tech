@@ -1,2 +1,2 @@
 // import './render.js'
-import './vModel.js'
+import './directive.js'
