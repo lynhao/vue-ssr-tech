@@ -17,26 +17,94 @@ bind：只调用一次，指令第一次绑定到元素时调用。在这里可�
 
 inserted：被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。
 **/
-const selfDirective = {
-  focus: {
-    inserted (el, binding) {
-      el.focus()
-      el.value = binding.value
+// const selfDirective = {
+//   focus: {
+//     inserted (el, binding) {
+//       el.focus()
+//       el.value = binding.value
+//     }
+//   }
+// }
+
+// new Vue({
+//   el: '#root',
+//   template: `
+//      <div>
+//       <input type="text" v-focus="message">
+//      </div>
+//   `,
+//   data () {
+//     return {
+//       message: 'this is test'
+//     }
+//   },
+//   directives: selfDirective
+// })
+
+const longpress = {
+  longpress: {
+    bind (el, binding, vNode) {
+      let press = null
+      let leave = null
+
+      // 计时器, 长按超过2秒则触发函数, 小于2秒则清除计时器
+      let startTime = function (e) {
+        if (e.type === 'click') {
+          return
+        }
+        if (!press) {
+          press = setTimeout(() => {
+            callback(e)
+          }, 2000)
+        }
+      }
+      let cancelTime = function () {
+        if (press) {
+          clearTimeout(press)
+          press = null
+        }
+        if (leave) {
+          clearInterval(leave)
+          leave = null
+        }
+      }
+      function callback (e) {
+        binding.value(vNode.context.value)
+        if (press) {
+          leave = setInterval(() => {
+            binding.value(vNode.context.value)
+          }, 1000)
+        }
+        // console.log(typeof binding.value)
+      }
+      el.addEventListener('mousedown', startTime, false)
+      el.addEventListener('mouseup', cancelTime, false)
     }
   }
 }
-
 new Vue({
   el: '#root',
   template: `
      <div>
-      <input type="text" v-focus="message">
+      <button v-longpress="incrementPlusTen" :style="btn">{{value}}</button>
      </div>
   `,
   data () {
     return {
-      message: 'this is test'
+      message: 'this is test',
+      value: 10,
+      btn: {
+        width: '100px',
+        height: '30px',
+        outline: '1px solid blue',
+        background: '#fff'
+      }
     }
   },
-  directives: selfDirective
+  methods: {
+    incrementPlusTen (n) {
+      this.value += n
+    }
+  },
+  directives: longpress
 })
